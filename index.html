@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Resume Builder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-image: url("bg.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      form {
+        margin-bottom: 30px;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+      textarea {
+        height: 150px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .button:hover {
+        background-color: #45a049;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .section h2 {
+        margin-bottom: 10px;
+      }
+
+      .section table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .section table td {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .section table td:first-child {
+        font-weight: bold;
+        width: 200px;
+      }
+
+      .section ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .section ul li {
+        margin-bottom: 5px;
+      }
+    </style>
+    <script>
+      function generateResume() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var education = document.getElementById("education").value;
+        var university = document.getElementById("university").value;
+        var languages = document.getElementById("languages").value;
+        var skills = document.getElementById("skills").value;
+        var projects = document.getElementById("projects").value;
+        var certificates = document.getElementById("certificates").value;
+
+        var preview = document.getElementById("resume-preview");
+        preview.innerHTML = `
+        <div class="section">
+          <h2>Personal Information</h2>
+          <table>
+            <tr>
+              <td>Name:</td>
+              <td>${name}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>${email}</td>
+            </tr>
+            <tr>
+              <td>Phone:</td>
+              <td>${phone}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <h2>Education</h2>
+          <table>
+            <tr>
+              <td>Degree:</td>
+              <td>${education}</td>
+            </tr>
+            <tr>
+              <td>University:</td>
+              <td>${university}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="section">
+          <h2>Languages</h2>
+          <ul>
+            ${generateListItems(languages)}
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Skills</h2>
+          <ul>
+            ${generateListItems(skills)}
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Projects</h2>
+          <ul>
+            ${generateListItems(projects)}
+          </ul>
+        </div>
+
+        <div class="section">
+          <h2>Certificates</h2>
+          <ul>
+            ${generateListItems(certificates)}
+          </ul>
+        </div>
+      `;
+
+        preview.style.display = "block";
+      }
+
+      function generateListItems(items) {
+        var itemList = "";
+        var itemsArray = items.split(",");
+        for (var i = 0; i < itemsArray.length; i++) {
+          itemList += "<li>" + itemsArray[i].trim() + "</li>";
+        }
+        return itemList;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Resume Builder</h1>
+      <form onsubmit="event.preventDefault(); generateResume();">
+        <div class="section">
+          <h2>Personal Information</h2>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" required />
+
+          <label for="phone">Phone:</label>
+          <input type="text" id="phone" name="phone" required />
+        </div>
+
+        <div class="section">
+          <h2>Education</h2>
+          <label for="education">Degree:</label>
+          <input type="text" id="education" name="education" required />
+
+          <label for="university">University:</label>
+          <input type="text" id="university" name="university" required />
+        </div>
+
+        <div class="section">
+          <h2>Languages</h2>
+          <label for="languages">List your languages (comma-separated):</label>
+          <input type="text" id="languages" name="languages" required />
+        </div>
+
+        <div class="section">
+          <h2>Skills</h2>
+          <label for="skills">List your skills (comma-separated):</label>
+          <input type="text" id="skills" name="skills" required />
+        </div>
+
+        <div class="section">
+          <h2>Projects</h2>
+          <label for="projects">List your projects (comma-separated):</label>
+          <textarea id="projects" name="projects" required></textarea>
+        </div>
+
+        <div class="section">
+          <h2>Certificates</h2>
+          <label for="certificates"
+            >List your certificates (comma-separated):</label
+          >
+          <textarea id="certificates" name="certificates" required></textarea>
+        </div>
+
+        <button class="button" type="submit">Generate Resume</button>
+      </form>
+
+      <div id="resume-preview"></div>
+    </div>
+  </body>
+</html>
